@@ -6,6 +6,7 @@ using FacebookTest.Models.CustomerTracking;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 using HttpPost = System.Web.Http.HttpPostAttribute;
+using HttpGet = System.Web.Http.HttpGetAttribute;
 
 namespace FacebookTest.Controllers
 {
@@ -30,6 +31,18 @@ namespace FacebookTest.Controllers
             PostToGA("contact", "testing");
 
             return View();
+        }
+
+        [HttpGet]
+        public string Facebook(string mode, string challenge, string verify_token)
+        {
+            const string token = "EAAEbGnrCSeoBAHrRIMAmqjmrPRoo3zrEjoHCEQbJkv4JvSnBlC0PqwaOkruGUme2pATjbigamnmRymiBK51m3rrNjS0CDp8SodkTQFGjTUURNEyu1gkibYC3CBZBDck1dmi48poaRdWgbWEBGzPZCiT3uWZCnRhRDp0MR0AbNZBd6jvyV7ZBc43v7JWM2zq0ZD";
+            if (verify_token == token)
+            {
+                return challenge;
+            }
+
+            return null;
         }
 
         [HttpPost]
