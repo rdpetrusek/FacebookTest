@@ -8,6 +8,7 @@ using System.Web.Mvc;
 using Newtonsoft.Json;
 using HttpPost = System.Web.Http.HttpPostAttribute;
 using HttpGet = System.Web.Http.HttpGetAttribute;
+using ActionName = System.Web.Http.ActionNameAttribute;
 using System.Net;
 
 namespace FacebookTest.Controllers
@@ -15,17 +16,16 @@ namespace FacebookTest.Controllers
     public class FacebookController : Controller
     {
         [HttpGet]
-        public HttpResponseMessage Get()
+        public HttpResponseMessage Index()
         {
-            var response = new HttpResponseMessage(HttpStatusCode.OK)
-            {
-                Content = new StringContent(HttpContext.Request.QueryString["hub.challenge"])
-            };
+            var response = new HttpResponseMessage(HttpStatusCode.OK);
+            response.Content = new StringContent(HttpContext.Request.QueryString["hub.challenge"]);
             response.Content.Headers.ContentType = new MediaTypeHeaderValue("text/plain");
             return response;
         }
 
         [HttpPost]
+        [ActionName("Index")]
         public JsonResult Post([FromBody]FacebookData data)
         {
             try
