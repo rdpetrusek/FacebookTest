@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Web.Http;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Linq;
 using FacebookTest.Models.CustomerTracking;
 using System.Web.Mvc;
 using Newtonsoft.Json;
 using HttpPost = System.Web.Http.HttpPostAttribute;
 using HttpGet = System.Web.Http.HttpGetAttribute;
+using System.Net;
 
 namespace FacebookTest.Controllers
 {
@@ -34,15 +36,14 @@ namespace FacebookTest.Controllers
         }
 
         [HttpGet]
-        public string Facebook(string mode, string challenge, string verify_token)
+        public HttpResponseMessage Facebook(string mode, string challenge, string verify_token)
         {
-            const string token = "EAAEbGnrCSeoBAHrRIMAmqjmrPRoo3zrEjoHCEQbJkv4JvSnBlC0PqwaOkruGUme2pATjbigamnmRymiBK51m3rrNjS0CDp8SodkTQFGjTUURNEyu1gkibYC3CBZBDck1dmi48poaRdWgbWEBGzPZCiT3uWZCnRhRDp0MR0AbNZBd6jvyV7ZBc43v7JWM2zq0ZD";
-            if (verify_token == token)
+            var response = new HttpResponseMessage(HttpStatusCode.OK)
             {
-                return challenge;
-            }
-
-            return null;
+                Content = new StringContent(HttpContext.Request.QueryString["hub.challenge"])
+            };
+            response.Content.Headers.ContentType = new MediaTypeHeaderValue("text/plain");
+            return response;
         }
 
         [HttpPost]
