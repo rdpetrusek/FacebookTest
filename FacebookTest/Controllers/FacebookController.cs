@@ -16,12 +16,14 @@ namespace FacebookTest.Controllers
     public class FacebookController : Controller
     {
         [HttpGet]
-        public HttpResponseMessage Index()
+        public string Index()
         {
-            var response = new HttpResponseMessage(HttpStatusCode.OK);
-            response.Content = new StringContent(HttpContext.Request.QueryString["hub.challenge"]);
-            response.Content.Headers.ContentType = new MediaTypeHeaderValue("text/plain");
-            return response;
+            //var response = new HttpResponseMessage(HttpStatusCode.OK);
+            //response.Content = new StringContent(HttpContext.Request.QueryString["hub.challenge"]);
+            var challenge = HttpContext.Request.QueryString["hub.challenge"];
+            //response.Content.Headers.ContentType = new MediaTypeHeaderValue("text/plain");
+            //return response;
+            return challenge;
         }
 
         [HttpPost]
