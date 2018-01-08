@@ -36,7 +36,7 @@ namespace FacebookTest.Controllers
         }
 
         [HttpGet]
-        public HttpResponseMessage Facebook(string mode, string challenge, string verify_token)
+        public HttpResponseMessage Facebook()
         {
             var response = new HttpResponseMessage(HttpStatusCode.OK)
             {
