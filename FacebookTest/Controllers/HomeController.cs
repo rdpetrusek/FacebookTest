@@ -27,6 +27,8 @@ namespace FacebookTest.Controllers
         {
             ViewBag.Message = "Your contact page.";
 
+            PostToGA("contact", "testing");
+
             return View();
         }
 
@@ -35,6 +37,7 @@ namespace FacebookTest.Controllers
         {
             try
             {
+                PostToGA("fb-test", "fb-received");
                 var entry = data.Entry.FirstOrDefault();
                 var change = entry?.Changes.FirstOrDefault();
                 if (change == null) return new JsonResult { Data = "Bad Request", JsonRequestBehavior = JsonRequestBehavior.AllowGet };
@@ -50,6 +53,7 @@ namespace FacebookTest.Controllers
                     var response = httpClientLead.GetAsync(formUrl).Result;
                     if (response != null && response.IsSuccessStatusCode)
                     {
+                        PostToGA("fb-test", "fb-get-form-success");
                         var formContent = response.Content;
                         var jsonObjLead = JsonConvert.DeserializeObject<FacebookLeadFormData>(formContent.ReadAsStringAsync().Result);
                         //jsonObjLead.Name contains the lead ad name
@@ -60,6 +64,7 @@ namespace FacebookTest.Controllers
                             var responseFields = httpClientFields.GetAsync(leadUrl).Result;
                             if (responseFields != null && responseFields.IsSuccessStatusCode)
                             {
+                                PostToGA("fb-test", "fb-get-lead-success");
                                 var fieldContent = responseFields.Content;
                                 var jsonObjFields = JsonConvert.DeserializeObject<FacebookLeadData>(fieldContent.ReadAsStringAsync().Result);
                                 //jsonObjFields.FieldData contains the field value
@@ -73,6 +78,12 @@ namespace FacebookTest.Controllers
             {
                 return new JsonResult { Data = "Bad Gateway", JsonRequestBehavior = JsonRequestBehavior.AllowGet };
             }
+        }
+
+        private void PostToGA(string id, string eventName)
+        {
+            var client = new HttpClient();
+            client.PostAsync(string.Format("https://www.google-analytics.com/collect?v=1&t=event&tid=UA-1242489-6&cid={0}&ec=users&ea={1}", id, eventName), null);
         }
     }
 }
