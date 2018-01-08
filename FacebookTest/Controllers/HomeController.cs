@@ -40,7 +40,7 @@ namespace FacebookTest.Controllers
                 if (change == null) return new JsonResult { Data = "Bad Request", JsonRequestBehavior = JsonRequestBehavior.AllowGet };
 
                 //Generate user access token here https://developers.facebook.com/tools/accesstoken/
-                const string token = "EAAAAJNf8yXABACtVifTrZBZC3KUyFEriQJsHg4UWPc0tsnyZAvwTzowwkCoRwniXrqeH6FlDnfSui4ZAfgCpEslm7MlN11mvPVAVJjQ2VOvQWhdVeooDfHIwg9JQcrOORoO2fYZArxoQ9X2ZCZAZBknWzen2QLrxD5hY3XMC7RUryrlPDBrXsZAdYEivZBqK0JYOwZD";
+                const string token = "EAAEbGnrCSeoBAHrRIMAmqjmrPRoo3zrEjoHCEQbJkv4JvSnBlC0PqwaOkruGUme2pATjbigamnmRymiBK51m3rrNjS0CDp8SodkTQFGjTUURNEyu1gkibYC3CBZBDck1dmi48poaRdWgbWEBGzPZCiT3uWZCnRhRDp0MR0AbNZBd6jvyV7ZBc43v7JWM2zq0ZD";
 
                 var leadUrl = $"https://graph.facebook.com/v2.10/{change.Value.LeadGenId}?access_token={token}";
                 var formUrl = $"https://graph.facebook.com/v2.10/{change.Value.FormId}?access_token={token}";
