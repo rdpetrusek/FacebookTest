@@ -1,3 +1,4 @@
+C:\Users\mbarrett\Documents\repos\Facebook\FacebookTest.Api\bin\ApplicationInsights.config
 C:\Users\mbarrett\Documents\repos\Facebook\FacebookTest.Api\bin\roslyn\csc.exe
 C:\Users\mbarrett\Documents\repos\Facebook\FacebookTest.Api\bin\roslyn\csc.exe.config
 C:\Users\mbarrett\Documents\repos\Facebook\FacebookTest.Api\bin\roslyn\csc.rsp
@@ -50,6 +51,7 @@ C:\Users\mbarrett\Documents\repos\Facebook\FacebookTest.Api\bin\FacebookTest.Api
 C:\Users\mbarrett\Documents\repos\Facebook\FacebookTest.Api\bin\FacebookTest.Api.dll
 C:\Users\mbarrett\Documents\repos\Facebook\FacebookTest.Api\bin\FacebookTest.Api.pdb
 C:\Users\mbarrett\Documents\repos\Facebook\FacebookTest.Api\bin\Antlr3.Runtime.dll
+C:\Users\mbarrett\Documents\repos\Facebook\FacebookTest.Api\bin\FacebookTest.dll
 C:\Users\mbarrett\Documents\repos\Facebook\FacebookTest.Api\bin\Microsoft.AI.Agent.Intercept.dll
 C:\Users\mbarrett\Documents\repos\Facebook\FacebookTest.Api\bin\Microsoft.AI.DependencyCollector.dll
 C:\Users\mbarrett\Documents\repos\Facebook\FacebookTest.Api\bin\Microsoft.AI.PerfCounterCollector.dll
@@ -71,6 +73,8 @@ C:\Users\mbarrett\Documents\repos\Facebook\FacebookTest.Api\bin\System.Web.WebPa
 C:\Users\mbarrett\Documents\repos\Facebook\FacebookTest.Api\bin\System.Web.WebPages.dll
 C:\Users\mbarrett\Documents\repos\Facebook\FacebookTest.Api\bin\System.Web.WebPages.Razor.dll
 C:\Users\mbarrett\Documents\repos\Facebook\FacebookTest.Api\bin\WebGrease.dll
+C:\Users\mbarrett\Documents\repos\Facebook\FacebookTest.Api\bin\FacebookTest.pdb
+C:\Users\mbarrett\Documents\repos\Facebook\FacebookTest.Api\bin\FacebookTest.dll.config
 C:\Users\mbarrett\Documents\repos\Facebook\FacebookTest.Api\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\mbarrett\Documents\repos\Facebook\FacebookTest.Api\bin\Newtonsoft.Json.xml
 C:\Users\mbarrett\Documents\repos\Facebook\FacebookTest.Api\bin\System.Net.Http.Formatting.xml
@@ -93,7 +97,3 @@ C:\Users\mbarrett\Documents\repos\Facebook\FacebookTest.Api\obj\Debug\FacebookTe
 C:\Users\mbarrett\Documents\repos\Facebook\FacebookTest.Api\obj\Debug\FacebookTest.Api.csproj.CoreCompileInputs.cache
 C:\Users\mbarrett\Documents\repos\Facebook\FacebookTest.Api\obj\Debug\FacebookTest.Api.dll
 C:\Users\mbarrett\Documents\repos\Facebook\FacebookTest.Api\obj\Debug\FacebookTest.Api.pdb
-C:\Users\mbarrett\Documents\repos\Facebook\FacebookTest.Api\bin\ApplicationInsights.config
-C:\Users\mbarrett\Documents\repos\Facebook\FacebookTest.Api\bin\FacebookTest.dll
-C:\Users\mbarrett\Documents\repos\Facebook\FacebookTest.Api\bin\FacebookTest.pdb
-C:\Users\mbarrett\Documents\repos\Facebook\FacebookTest.Api\bin\FacebookTest.dll.config
