@@ -7,6 +7,7 @@ using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Http;
+using FacebookTest.Models.CustomerTracking;
 using Newtonsoft.Json;
 
 namespace FacebookTest.Controllers
@@ -14,66 +15,68 @@ namespace FacebookTest.Controllers
     //[System.Web.Http.RoutePrefix("facebook")]
     public class FacebookController : ApiController
     {
-        //[HttpGet]
-        //public HttpResponseMessage Get()
-        //{
-        //    var response = new HttpResponseMessage(HttpStatusCode.OK)
-        //    {
-        //        Content = new StringContent(HttpContext.Current.Request.QueryString["hub.challenge"])
-        //    };
-        //    response.Content.Headers.ContentType = new MediaTypeHeaderValue("text/plain");
-        //    return response;
-        //}
+        [HttpGet]
+        public HttpResponseMessage Get()
+        {
+            var response = new HttpResponseMessage(HttpStatusCode.OK)
+            {
+                Content = new StringContent(HttpContext.Current.Request.QueryString["hub.challenge"])
+            };
+            response.Content.Headers.ContentType = new MediaTypeHeaderValue("text/plain");
+            return response;
+        }
 
-        //[HttpPost]
-        //public async Task<HttpResponseMessage> Post([FromBody] FacebookData data)
-        //{
-        //    try
-        //    {
-        //        PostToGA("fb-test", "fb-received");
-        //        var entry = data.Entry.FirstOrDefault();
-        //        var change = entry?.Changes.FirstOrDefault();
-        //        if (change == null) return new HttpResponseMessage(HttpStatusCode.BadRequest);
+        [HttpPost]
+        public async Task<HttpResponseMessage> Post([FromBody] FacebookData data)
+        {
+            try
+            {
+                PostToGA("fb-test", "fb-received");
+                var entry = data.Entry.FirstOrDefault();
+                var change = entry?.Changes.FirstOrDefault();
+                if (change == null) return new HttpResponseMessage(HttpStatusCode.BadRequest);
 
-        //        //Generate user access token here https://developers.facebook.com/tools/accesstoken/
-        //        const string token = "EAAEbGnrCSeoBAHrRIMAmqjmrPRoo3zrEjoHCEQbJkv4JvSnBlC0PqwaOkruGUme2pATjbigamnmRymiBK51m3rrNjS0CDp8SodkTQFGjTUURNEyu1gkibYC3CBZBDck1dmi48poaRdWgbWEBGzPZCiT3uWZCnRhRDp0MR0AbNZBd6jvyV7ZBc43v7JWM2zq0ZD";
+                //Generate user access token here https://developers.facebook.com/tools/accesstoken/
+                const string token = "EAAEbGnrCSeoBAHrRIMAmqjmrPRoo3zrEjoHCEQbJkv4JvSnBlC0PqwaOkruGUme2pATjbigamnmRymiBK51m3rrNjS0CDp8SodkTQFGjTUURNEyu1gkibYC3CBZBDck1dmi48poaRdWgbWEBGzPZCiT3uWZCnRhRDp0MR0AbNZBd6jvyV7ZBc43v7JWM2zq0ZD";
 
-        //        var leadUrl = $"https://graph.facebook.com/v2.10/{change.Value.LeadGenId}?access_token={token}";
-        //        var formUrl = $"https://graph.facebook.com/v2.10/{change.Value.FormId}?access_token={token}";
+                var leadUrl = $"https://graph.facebook.com/v2.10/{change.Value.LeadGenId}?access_token={token}";
+                var formUrl = $"https://graph.facebook.com/v2.10/{change.Value.FormId}?access_token={token}";
 
-        //        using (var httpClientLead = new HttpClient())
-        //        {
-        //            var response = await httpClientLead.GetStringAsync(formUrl);
-        //            if (!string.IsNullOrEmpty(response))
-        //            {
-        //                var jsonObjLead = JsonConvert.DeserializeObject<FacebookLeadFormData>(response);
-        //                //jsonObjLead.Name contains the lead ad name
+                using (var httpClientLead = new HttpClient())
+                {
+                    var response = await httpClientLead.GetStringAsync(formUrl);
+                    if (!string.IsNullOrEmpty(response))
+                    {
+                        PostToGA("fb-test", "fb-lead-form");
+                        var jsonObjLead = JsonConvert.DeserializeObject<FacebookLeadFormData>(response);
+                        //jsonObjLead.Name contains the lead ad name
 
-        //                //If response is valid get the field data
-        //                using (var httpClientFields = new HttpClient())
-        //                {
-        //                    var responseFields = await httpClientFields.GetStringAsync(leadUrl);
-        //                    if (!string.IsNullOrEmpty(responseFields))
-        //                    {
-        //                        var jsonObjFields = JsonConvert.DeserializeObject<FacebookLeadData>(responseFields);
-        //                        //jsonObjFields.FieldData contains the field value
-        //                    }
-        //                }
-        //            }
-        //        }
-        //        return new HttpResponseMessage(HttpStatusCode.OK);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return new HttpResponseMessage(HttpStatusCode.BadGateway);
-        //    }
-        //}
+                        //If response is valid get the field data
+                        using (var httpClientFields = new HttpClient())
+                        {
+                            var responseFields = await httpClientFields.GetStringAsync(leadUrl);
+                            if (!string.IsNullOrEmpty(responseFields))
+                            {
+                                PostToGA("fb-test", "fb-lead");
+                                var jsonObjFields = JsonConvert.DeserializeObject<FacebookLeadData>(responseFields);
+                                //jsonObjFields.FieldData contains the field value
+                            }
+                        }
+                    }
+                }
+                return new HttpResponseMessage(HttpStatusCode.OK);
+            }
+            catch (Exception ex)
+            {
+                return new HttpResponseMessage(HttpStatusCode.BadGateway);
+            }
+        }
 
-        //private void PostToGA(string id, string eventName)
-        //{
-        //    var client = new HttpClient();
-        //    client.PostAsync(string.Format("https://www.google-analytics.com/collect?v=1&t=event&tid=UA-1242489-6&cid={0}&ec=users&ea={1}", id, eventName), null);
-        //}
+        private void PostToGA(string id, string eventName)
+        {
+            var client = new HttpClient();
+            client.PostAsync(string.Format("https://www.google-analytics.com/collect?v=1&t=event&tid=UA-1242489-6&cid={0}&ec=users&ea={1}", id, eventName), null);
+        }
     }
     //[HttpGet]
     //public string Index()
